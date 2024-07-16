@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace MoonShine\Laravel;
+namespace MoonShine\Laravel\DependencyInjection;
 
 use Closure;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use MoonShine\Core\Contracts\ConfiguratorContract;
-use MoonShine\Core\Contracts\PageContract;
+use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
+use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Contracts\UI\FormBuilderContract;
+use MoonShine\Contracts\UI\FormContract;
 use MoonShine\Laravel\Exceptions\MoonShineNotFoundException;
 use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\UI\Components\FormBuilder;
-use MoonShine\UI\Contracts\Forms\FormContract;
-use MoonShine\UI\MoonShineLayout;
+use MoonShine\UI\Layout;
 use Throwable;
 
 final class MoonShineConfigurator implements ConfiguratorContract
@@ -358,7 +358,7 @@ final class MoonShineConfigurator implements ConfiguratorContract
     }
 
     /**
-     * @return class-string<MoonShineLayout>
+     * @return class-string<Layout>
      */
     public function getLayout(): string
     {
@@ -366,7 +366,7 @@ final class MoonShineConfigurator implements ConfiguratorContract
     }
 
     /**
-     * @param  class-string<MoonShineLayout>|Closure  $layout
+     * @param  class-string<Layout>|Closure  $layout
      */
     public function layout(string|Closure $layout): self
     {
@@ -435,7 +435,7 @@ final class MoonShineConfigurator implements ConfiguratorContract
      * @template-covariant T of FormContract
      * @param  class-string<T>  $default
      */
-    public function getForm(string $name, string $default, mixed ...$parameters): FormBuilder
+    public function getForm(string $name, string $default, mixed ...$parameters): FormBuilderContract
     {
         $class = $this->get("forms.$name", $default);
 

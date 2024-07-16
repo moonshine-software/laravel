@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace MoonShine\Laravel;
 
-use MoonShine\Core\Contracts\MoonShineEndpoints;
-use MoonShine\Core\Contracts\PageContract;
-use MoonShine\Core\Contracts\ResourceContract;
+use MoonShine\Contracts\Core\DependencyInjection\EndpointsContract;
+use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Contracts\Core\ResourceContract;
 use MoonShine\Core\Exceptions\MoonShineException;
-use MoonShine\Core\MoonShineRouter;
 use MoonShine\Core\Pages\Pages;
+use MoonShine\Laravel\DependencyInjection\MoonShineRouter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Throwable;
 
-final readonly class LaravelEndpoints implements MoonShineEndpoints
+final readonly class MoonShineEndpoints implements EndpointsContract
 {
     public function __construct(
         private MoonShineRouter $router
@@ -130,14 +130,14 @@ final readonly class LaravelEndpoints implements MoonShineEndpoints
             $targetResource = $resource instanceof ResourceContract
                 ? $resource
                 : moonshine()->getResources()->findByClass($resource);
-
+            
             $targetPage = $targetResource?->getPages()->when(
                 is_null($page),
                 static fn (Pages $pages) => $pages->first(),
                 static fn (Pages $pages): ?PageContract => $pages->findByUri(
                     $page instanceof PageContract
                         ? $page->getUriKey()
-                        : LaravelMoonShineRouter::uriKey($page)
+                        : MoonShineRouter::uriKey($page)
                 ),
             );
         }

@@ -2,14 +2,21 @@
 
 declare(strict_types=1);
 
-namespace MoonShine\Laravel;
+namespace MoonShine\Laravel\DependencyInjection;
 
-use MoonShine\Core\Contracts\PageContract;
-use MoonShine\Core\Contracts\ResourceContract;
-use MoonShine\Core\MoonShineRouter;
+use MoonShine\Contracts\Core\DependencyInjection\EndpointsContract;
+use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Contracts\Core\ResourceContract;
+use MoonShine\Core\AbstractRouter;
+use MoonShine\Laravel\MoonShineEndpoints;
 
-final class LaravelMoonShineRouter extends MoonShineRouter
+final class MoonShineRouter extends AbstractRouter
 {
+    public function getEndpoints(): EndpointsContract
+    {
+        return new MoonShineEndpoints($this);
+    }
+
     public function to(string $name = '', array $params = []): string
     {
         return route(

@@ -6,7 +6,7 @@ namespace MoonShine\Laravel\Contracts\Fields;
 
 use Closure;
 
-interface HasAsyncSearch
+interface HasAsyncSearchContract
 {
     public function isAsyncSearch(): bool;
 

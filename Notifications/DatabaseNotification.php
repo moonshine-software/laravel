@@ -12,7 +12,7 @@ use MoonShine\Support\Traits\Makeable;
 /**
  * @method static static make(string $message, array $button = [], null|Color|string $color = null)
  */
-final class MoonShineDatabaseNotification extends Notification
+final class DatabaseNotification extends Notification
 {
     use Queueable;
     use Makeable;

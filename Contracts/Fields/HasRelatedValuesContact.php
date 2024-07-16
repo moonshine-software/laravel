@@ -7,7 +7,7 @@ namespace MoonShine\Laravel\Contracts\Fields;
 use Closure;
 use MoonShine\Support\DTOs\Select\Options;
 
-interface HasRelatedValues
+interface HasRelatedValuesContact
 {
     public function getValues(): Options;
 
