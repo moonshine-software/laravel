@@ -9,7 +9,7 @@ use MoonShine\MenuManager\MenuItem;
 
 abstract class MoonShineCommand extends Command
 {
-    protected string $stubsDir = __DIR__ . '/../../../stubs';
+    protected string $stubsDir = __DIR__ . '/../../stubs';
 
     protected function getDirectory(): string
     {

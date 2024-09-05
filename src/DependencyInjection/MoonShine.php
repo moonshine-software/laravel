@@ -11,6 +11,18 @@ use Psr\Container\ContainerInterface;
 
 final class MoonShine extends Core
 {
+    public static function path(string $path = ''): string
+    {
+        $path = $path ? DIRECTORY_SEPARATOR . $path : $path;
+
+        return realpath(dirname(__DIR__)) . '/../' . trim($path, '/');
+    }
+
+    public static function UIPath(string $path = ''): string
+    {
+        return self::path("/../UI$path");
+    }
+
     public function runningUnitTests(): bool
     {
         return $this->getContainer()->runningUnitTests();

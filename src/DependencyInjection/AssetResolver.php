@@ -36,6 +36,6 @@ final class AssetResolver implements AssetResolverContract
 
     public function getHotFile(): string
     {
-        return Core::path('/public') . '/hot';
+        return MoonShine::UIPath('/dist/hot');
     }
 }

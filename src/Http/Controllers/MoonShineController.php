@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Controller as BaseController;
 use MoonShine\Contracts\Core\PageContract;
 use MoonShine\Contracts\UI\TableBuilderContract;
-use MoonShine\Core\Pages\QuickPage;
+use MoonShine\Laravel\Pages\QuickPage;
 use MoonShine\Laravel\Http\Responses\MoonShineJsonResponse;
 use MoonShine\Laravel\Notifications\MoonShineNotificationContract;
 use MoonShine\Laravel\Traits\Controller\InteractsWithAuth;

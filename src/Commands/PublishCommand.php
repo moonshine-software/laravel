@@ -6,6 +6,7 @@ namespace MoonShine\Laravel\Commands;
 
 use Illuminate\Filesystem\Filesystem;
 
+use MoonShine\Laravel\DependencyInjection\MoonShine;
 use function Laravel\Prompts\{confirm, info, multiselect};
 
 use MoonShine\Core\Core;
@@ -84,13 +85,13 @@ class PublishCommand extends MoonShineCommand
 
     private function publishSystemResource(string $name, string $model): void
     {
-        $classPath = "/src/Laravel/Resources/$name.php";
+        $classPath = "src/Resources/$name.php";
         $fullClassPath = moonshineConfig()->getDir("/Resources/$name.php");
         $targetNamespace = moonshineConfig()->getNamespace('\Resources');
 
         (new Filesystem())->put(
             $fullClassPath,
-            file_get_contents(Core::path($classPath))
+            file_get_contents(MoonShine::path($classPath))
         );
 
         $this->replaceInFile(

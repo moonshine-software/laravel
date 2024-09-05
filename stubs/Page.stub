@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {namespace};
+
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\UI\Components\MoonShineComponent;
+
+class DummyPage extends Page
+{
+    /**
+     * @return array<string, string>
+     */
+    public function getBreadcrumbs(): array
+    {
+        return [
+            '#' => $this->getTitle()
+        ];
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title ?: 'DummyTitle';
+    }
+
+    /**
+     * @return list<MoonShineComponent>
+     */
+    protected function components(): iterable
+	{
+		return [];
+	}
+}

@@ -231,7 +231,7 @@ class MoonShineServiceProvider extends ServiceProvider
             ->registerRouterMacro();
 
         $this->mergeConfigFrom(
-            Core::path('/config/moonshine.php'),
+            MoonShine::path('/config/moonshine.php'),
             'moonshine'
         );
     }
@@ -239,25 +239,26 @@ class MoonShineServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (moonshineConfig()->isUseMigrations()) {
-            $this->loadMigrationsFrom(Core::path('/database/migrations'));
+            $this->loadMigrationsFrom(MoonShine::path('/database/migrations'));
         }
 
         $this->publishes([
-            Core::path('/config/moonshine.php') => config_path(
+            MoonShine::path('/config/moonshine.php') => config_path(
                 'moonshine.php'
             ),
         ]);
 
-        $this->loadTranslationsFrom(Core::path('/lang'), 'moonshine');
-        $this->loadRoutesFrom(Core::path('/routes/moonshine.php'));
-        $this->loadViewsFrom(__DIR__ . '/../../../resources/views', 'moonshine');
+        $this->loadTranslationsFrom(MoonShine::path('/lang'), 'moonshine');
+        $this->loadRoutesFrom(MoonShine::path('/routes/moonshine.php'));
+        $this->loadViewsFrom(__DIR__ . '/../../../UI/resources/views', 'moonshine');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'moonshine');
 
         $this->publishes([
-            Core::path('/public') => public_path('vendor/moonshine'),
+            MoonShine::UIPath('/dist') => public_path('vendor/moonshine'),
         ], ['moonshine-assets', 'laravel-assets']);
 
         $this->publishes([
-            Core::path('/lang') => $this->app->langPath(
+            MoonShine::path('/lang') => $this->app->langPath(
                 'vendor/moonshine'
             ),
         ]);
